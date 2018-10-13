@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity
         implements OnClickListener {
@@ -21,6 +22,7 @@ public class MainActivity extends Activity
 
     @Override
     public void onClick(View v) {
-        // create new task
+        Toast.makeText(this, "Button Clicked",
+                        Toast.LENGTH_LONG).show();
     }
 }
