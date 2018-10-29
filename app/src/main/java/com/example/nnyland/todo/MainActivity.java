@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -27,13 +29,6 @@ public class MainActivity extends Activity
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
     }
 
-    @Override
-    public void onClick(View v) {
-        Toast.makeText(this, "Button Clicked",
-                        Toast.LENGTH_LONG).show();
-        Log.d(TAG, "RUN TERMINAL OUTPUT: NEW TASK BUTTON CLICKED!");
-    }
-
     /*
     @Override
     public void onPause() {
@@ -51,4 +46,23 @@ public class MainActivity extends Activity
         txtTask1.setText(task1);
     }
     */
+
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(this, "Button Clicked",
+                Toast.LENGTH_LONG).show();
+        Log.d(TAG, "RUN TERMINAL OUTPUT: NEW TASK BUTTON CLICKED!");
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_settings, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // attach statements
+        return true;
+    }
 }
