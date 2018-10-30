@@ -1,18 +1,15 @@
 package com.example.nnyland.todo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-
-import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity
         implements OnClickListener {
@@ -49,9 +46,9 @@ public class MainActivity extends Activity
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "Button Clicked",
+        Toast.makeText(this, "ADD TASK",
                 Toast.LENGTH_LONG).show();
-        Log.d(TAG, "RUN TERMINAL OUTPUT: NEW TASK BUTTON CLICKED!");
+        //Log.d(TAG, "RUN TERMINAL OUTPUT: NEW TASK BUTTON CLICKED!");
     }
 
     @Override
@@ -62,7 +59,22 @@ public class MainActivity extends Activity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // attach statements
-        return true;
+        if (item.getItemId() == R.id.menu_settings) {
+            startActivity(new Intent(getApplicationContext(),
+                    SettingsActivity.class));
+            //Toast.makeText(this, "SETTINGS",
+            //        Toast.LENGTH_LONG).show();
+            //Log.d(TAG, "RUN TERMINAL OUTPUT: SETTINGS SELECTION CLICKED!");
+            return true;
+        } else if (item.getItemId() == R.id.menu_about) {
+            //startActivity(new Intent(getApplicationContext(),
+            //        AboutActivity.class));
+            Toast.makeText(this, "ABOUT",
+                    Toast.LENGTH_LONG).show();
+            //Log.d(TAG, "RUN TERMINAL OUTPUT: ABOUT SELECTION CLICKED!");
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }
