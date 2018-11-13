@@ -26,29 +26,20 @@ public class MainActivity extends Activity
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
     }
 
-    /*
     @Override
     public void onPause() {
-        Editor editor = savedValues.edit();
-        editor.putString("task1", task1);
-        //editor.commit();
-        editor.apply();
         super.onPause();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        task1 = savedValues.getString("task1", "");
-        txtTask1.setText(task1);
     }
-    */
 
     @Override
     public void onClick(View v) {
         Toast.makeText(this, "ADD TASK",
                 Toast.LENGTH_LONG).show();
-        //Log.d(TAG, "RUN TERMINAL OUTPUT: NEW TASK BUTTON CLICKED!");
     }
 
     @Override
@@ -62,16 +53,12 @@ public class MainActivity extends Activity
         if (item.getItemId() == R.id.menu_settings) {
             startActivity(new Intent(getApplicationContext(),
                     SettingsActivity.class));
-            //Toast.makeText(this, "SETTINGS",
-            //        Toast.LENGTH_LONG).show();
-            //Log.d(TAG, "RUN TERMINAL OUTPUT: SETTINGS SELECTION CLICKED!");
             return true;
         } else if (item.getItemId() == R.id.menu_about) {
-            //startActivity(new Intent(getApplicationContext(),
-            //        AboutActivity.class));
+            startActivity(new Intent(getApplicationContext(),
+                    AboutActivity.class));
             Toast.makeText(this, "ABOUT",
                     Toast.LENGTH_LONG).show();
-            //Log.d(TAG, "RUN TERMINAL OUTPUT: ABOUT SELECTION CLICKED!");
             return true;
         } else {
             return super.onOptionsItemSelected(item);
