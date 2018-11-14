@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
@@ -22,14 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SettingsActivity"
             android:label="@string/menu_settings" >
         </activity>
+
         <activity
             android:name=".AboutActivity"
             android:label="@string/menu_about"
             andooid:theme="@style/DialogTheme" >
         </activity>
     </application>
-
 </manifest>
