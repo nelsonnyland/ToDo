@@ -9,19 +9,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity
         implements OnClickListener {
 
     private SharedPreferences savedValues;
-    private Button btnAddTask;
+    private ImageView btnAddTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnAddTask = (Button) findViewById(R.id.btnAddTask);
+        setContentView(R.layout.activity_add_task);
+        btnAddTask = (ImageView) findViewById(R.id.btn_add_task);
         btnAddTask.setOnClickListener(this);
         savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
     }
@@ -39,7 +41,7 @@ public class MainActivity extends Activity
     @Override
     public void onClick(View v) {
         Toast.makeText(this, "ADD TASK",
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -57,11 +59,13 @@ public class MainActivity extends Activity
         } else if (item.getItemId() == R.id.menu_about) {
             startActivity(new Intent(getApplicationContext(),
                     AboutActivity.class));
-            Toast.makeText(this, "ABOUT",
-                    Toast.LENGTH_LONG).show();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void createTasks() {
+        //
     }
 }
