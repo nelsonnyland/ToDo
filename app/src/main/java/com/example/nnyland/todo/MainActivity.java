@@ -4,28 +4,32 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends Activity
         implements OnClickListener {
 
+    private ArrayList<String> tasklist;
+    private ListView taskView;
     private SharedPreferences savedValues;
-    private ImageView btnAddTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setContentView(R.layout.activity_add_task);
-        btnAddTask = (ImageView) findViewById(R.id.btn_add_task);
-        btnAddTask.setOnClickListener(this);
-        savedValues = getSharedPreferences("SavedValues", MODE_PRIVATE);
+        setContentView(R.layout.main_layout);
+        savedValues = getSharedPreferences(
+                "SavedValues", MODE_PRIVATE);
+        taskView = findViewById(R.id.listView_taskView);
+        refreshTaskList();
     }
 
     @Override
@@ -40,13 +44,11 @@ public class MainActivity extends Activity
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "ADD TASK",
-                Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_settings, menu);
+        getMenuInflater().inflate(R.menu.settings_menu, menu);
         return true;
     }
 
@@ -65,7 +67,14 @@ public class MainActivity extends Activity
         }
     }
 
-    private void createTasks() {
-        //
+    public void refreshTaskList() {
+        // grab tasks from db
+        tasklist = new ArrayList<String>();
+        tasklist.add("task 1");
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                MainActivity.this, R.layout.task_layout,
+                tasklist
+        );
+        taskView.setAdapter(arrayAdapter);
     }
 }
