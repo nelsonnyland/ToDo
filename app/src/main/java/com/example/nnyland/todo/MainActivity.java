@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends Activity
         implements OnClickListener {
 
-    private ArrayList<String> tasklist;
+    private ArrayList<Task> tasklist;
     private ListView taskView;
     private SharedPreferences savedValues;
 
@@ -69,12 +69,16 @@ public class MainActivity extends Activity
 
     public void refreshTaskList() {
         // grab tasks from db
-        tasklist = new ArrayList<String>();
-        tasklist.add("task 1");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        tasklist = new ArrayList<Task>();
+        Task test1 = new Task(01, "task 1", "Notes...",
+                false, false);
+        tasklist.add(test1);
+
+        // set adapter for task layout
+        TaskAdapter adapter = new TaskAdapter(
                 MainActivity.this, R.layout.task_layout,
                 tasklist
         );
-        taskView.setAdapter(arrayAdapter);
+        taskView.setAdapter(adapter);
     }
 }
