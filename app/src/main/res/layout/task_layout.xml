@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout_taskItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <CheckBox
+        android:id="@+id/task_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="5dp"
+        android:onClick="onClick" />
+
+    <TextView
+        android:id="@+id/task_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/task_checkbox"
+        android:layout_alignBottom="@+id/task_checkbox"
+        android:layout_toRightOf="@+id/task_checkbox"
+        android:text="@string/task_title"
+        android:onClick="onClick" />
+
+    <TextView
+        android:id="@+id/task_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/task_title"
+        android:layout_marginTop="-5dp"
+        android:layout_toRightOf="@+id/task_checkbox"
+        android:paddingBottom="7dp"
+        android:text="@string/task_notes"
+        android:onClick="onClick" />
+
+</RelativeLayout>
