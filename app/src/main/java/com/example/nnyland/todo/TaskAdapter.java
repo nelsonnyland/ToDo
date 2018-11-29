@@ -41,15 +41,16 @@ public class TaskAdapter extends ArrayAdapter {
         TextView title = convertView.findViewById(R.id.task_title);
         TextView notes = convertView.findViewById(R.id.task_notes);
 
-        // gets the task location
+        // gets the task object
         Task task = tasks.get(position);
 
-        // sets the text for the task
+        // sets the checked state
         checkBox.setChecked(task.isComplete());
+        // sets the text views
         title.setText(task.getTitle());
         notes.setText(task.getNotes());
 
-        // return view
+        // returns view to Activity to display
         return convertView;
     }
 }
