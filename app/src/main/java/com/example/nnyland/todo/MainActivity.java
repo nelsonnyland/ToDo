@@ -4,7 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,20 +19,25 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends Activity
+public class MainActivity extends AppCompatActivity
         implements OnClickListener {
 
+    private FloatingActionButton addTask;
+    private SharedPreferences savedValues;
     private ArrayList<Task> tasklist;
     private ListView taskView;
-    private SharedPreferences savedValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+
         savedValues = getSharedPreferences(
                 "SavedValues", MODE_PRIVATE);
+        addTask = findViewById(R.id.button_addTask);
         taskView = findViewById(R.id.listView_taskView);
+        addTask.setOnClickListener(this);
+
         refreshTaskList();
     }
 
@@ -44,6 +53,10 @@ public class MainActivity extends Activity
 
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.button_addTask) {
+            Snackbar.make(v, "Added task", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
+        }
     }
 
     @Override
