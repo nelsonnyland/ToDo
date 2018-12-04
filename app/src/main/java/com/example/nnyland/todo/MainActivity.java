@@ -1,21 +1,17 @@
 package com.example.nnyland.todo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -25,7 +21,9 @@ public class MainActivity extends AppCompatActivity
     private FloatingActionButton addTask;
     private SharedPreferences savedValues;
     private ArrayList<Task> tasklist;
-    private ListView taskView;
+    private RecyclerView taskView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +33,10 @@ public class MainActivity extends AppCompatActivity
         savedValues = getSharedPreferences(
                 "SavedValues", MODE_PRIVATE);
         addTask = findViewById(R.id.button_addTask);
-        taskView = findViewById(R.id.listView_taskView);
+        taskView = findViewById(R.id.taskView);
         addTask.setOnClickListener(this);
 
-        refreshTaskList();
+        createTaskList();
     }
 
     @Override
@@ -80,18 +78,23 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void refreshTaskList() {
+    /**
+     * Obtains a tasklist from database and fills adapter with data
+     *
+     */
+    public void createTaskList() {
         // grab tasks from db
         tasklist = new ArrayList<Task>();
         Task test1 = new Task(01, "task 1", "Notes...",
                 false, false);
         tasklist.add(test1);
 
-        // set adapter for task layout
-        TaskAdapter adapter = new TaskAdapter(
-                MainActivity.this, R.layout.task_layout,
-                tasklist
-        );
+        // set layout manager
+        manager = new LinearLayoutManager(this);
+        taskView.setLayoutManager(manager);
+
+        // set adapter for layout
+        adapter = new TaskAdapter(tasklist);
         taskView.setAdapter(adapter);
     }
 }
