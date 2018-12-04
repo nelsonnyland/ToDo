@@ -1,56 +1,56 @@
 package com.example.nnyland.todo;
 
-import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import java.util.List;
 
-public class TaskAdapter extends ArrayAdapter {
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
 
-    private static final String TAG = "TaskAdapter";
-    private final int layoutResource;
-    private final LayoutInflater layoutInflater;
-    private List<Task> tasks;
+    private List<Task> taskList;
 
-    public TaskAdapter(Context context, int resource, List<Task> tasks) {
-        super(context, resource);
-        this.layoutResource = resource;
-        this.layoutInflater = LayoutInflater.from(context);
-        this.tasks = tasks;
-    }
-
-    @Override
-    public int getCount() {
-        return tasks.size();
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        // creates an instance of the task layout if there isn't one already
-        if (convertView == null) {
-            convertView = layoutInflater.inflate(layoutResource, parent, false);
+    // view holder for task views
+    public static class TaskHolder extends RecyclerView.ViewHolder {
+        public CheckBox checkBox;
+        public EditText taskTitle;
+        public TaskHolder(View v) {
+            super(v);
+            checkBox = v.findViewById(R.id.task_checkbox);
+            taskTitle = v.findViewById(R.id.task_title);
         }
+    }
 
-        // gets the text-views in the layout
-        CheckBox checkBox = convertView.findViewById(R.id.task_checkbox);
-        TextView title = convertView.findViewById(R.id.task_title);
-        TextView notes = convertView.findViewById(R.id.task_notes);
+    // constructor
+    public TaskAdapter(List<Task> tasks) {
+        this.taskList = tasks;
+    }
 
-        // gets the task object
-        Task task = tasks.get(position);
+    // create new view
+    @Override
+    public TaskAdapter.TaskHolder onCreateViewHolder(ViewGroup parent,
+                                                     int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.task_layout, parent, false);
+        return new TaskHolder(view);
+    }
 
-        // sets the checked state
-        checkBox.setChecked(task.isComplete());
-        // sets the text views
-        title.setText(task.getTitle());
-        notes.setText(task.getNotes());
+    // refresh content
+    @Override
+    public void onBindViewHolder(TaskHolder taskHolder, int position) {
+        // get task
+        Task task = taskList.get(position);
+        // set data
+        taskHolder.checkBox.setChecked(task.isComplete());
+        taskHolder.taskTitle.setText(task.getTitle());
+    }
 
-        // returns view to Activity to display
-        return convertView;
+    @Override
+    public int getItemCount() {
+        return taskList.size();
     }
 }

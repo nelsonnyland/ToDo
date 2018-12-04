@@ -14,28 +14,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_margin="5dp"
         android:onClick="onClick" />
 
-    <TextView
+    <EditText
         android:id="@+id/task_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/task_checkbox"
         android:layout_alignBottom="@+id/task_checkbox"
+        android:layout_toEndOf="@+id/task_checkbox"
         android:layout_toRightOf="@+id/task_checkbox"
+        android:inputType="text"
+        android:onClick="onClick"
         android:text="@string/task_title"
-        android:onClick="onClick" />
-
-    <TextView
-        android:id="@+id/task_notes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/task_title"
-        android:layout_marginTop="-5dp"
-        android:layout_toRightOf="@+id/task_checkbox"
-        android:paddingBottom="7dp"
-        android:text="@string/task_notes"
-        android:onClick="onClick" />
+        android:textStyle="bold" />
 
 </RelativeLayout>
