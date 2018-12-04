@@ -14,13 +14,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements OnClickListener {
 
     private FloatingActionButton addTask;
     private SharedPreferences savedValues;
-    private ArrayList<Task> tasklist;
+    private List<Task> tasklist;
     private RecyclerView taskView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager manager;
@@ -52,8 +53,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_addTask) {
-            Snackbar.make(v, "Added task", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            addTask();
         }
     }
 
@@ -79,15 +79,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-     * Obtains a tasklist from database and fills adapter with data
+     * Obtains a tasklist from database and fills adapter with data.
      *
      */
     public void createTaskList() {
-        // grab tasks from db
         tasklist = new ArrayList<Task>();
-        Task test1 = new Task(01, "task 1", "Notes...",
-                false, false);
-        tasklist.add(test1);
+        // GRAB TASKS FROM DB //
 
         // set layout manager
         manager = new LinearLayoutManager(this);
@@ -96,5 +93,15 @@ public class MainActivity extends AppCompatActivity
         // set adapter for layout
         adapter = new TaskAdapter(tasklist);
         taskView.setAdapter(adapter);
+    }
+
+    /**
+     * Creates a blank task in response to the add task button
+     * click event.
+     */
+    public void addTask() {
+        Task task = new Task();
+        tasklist.add(task);
+        // REFRESH VIEW //
     }
 }
