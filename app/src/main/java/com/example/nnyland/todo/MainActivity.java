@@ -100,8 +100,9 @@ public class MainActivity extends AppCompatActivity
      * click event.
      */
     public void addTask() {
+        int size = adapter.getItemCount();
         Task task = new Task();
         tasklist.add(task);
-        // REFRESH VIEW //
+        adapter.notifyItemInserted(size);
     }
 }
