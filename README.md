@@ -2,6 +2,7 @@
 
 # ToDo
 ## A task manager for Android.
+*Made using Android Studio*
 ### Features:
 * Multiple folders for organizing tasks
 * Cloud based storage to secure your data
